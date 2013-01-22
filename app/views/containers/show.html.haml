@@ -1,0 +1,23 @@
+%h1= @container.name
+
+%table.table.table-condensed
+  %tr
+    %td State
+    %td= running_helper @container.running?
+  %tr
+    %td Memory
+    %td= bytes_in_megabytes(@container.memory_limit).to_s + ' MB'
+  %tr
+    %td Root Path
+    - @lxc_path = File.join(lxc_path, @container.name)
+    %td= @lxc_path
+  %tr
+    %td Container Configuration
+    %td= link_to lxc_config_path_for(@container.name), "/containers/#{@container.name}/config"
+  %tr
+    %td Network Configuration
+    - path = lxc_interfaces_path_for(@container.name) 
+    - if path.nil?
+      %td This Container does not have an interface Configuration
+    - else
+      %td= link_to path, "/containers/#{@container.name}/interfaces"

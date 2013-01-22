@@ -1,0 +1,14 @@
+%h1 Containers
+
+%table.table.table-condensed
+  %thead
+    %tr
+      %th Name
+      %th State
+      %th Memory
+  %tbody
+    - @containers.each do |c|
+      %tr
+        %td= link_to c.name, "containers/#{c.name}"
+        %td= c.running? ? "Running" : "Not Running"
+        %td= bytes_in_megabytes(c.memory_limit).to_s + ' MB'
