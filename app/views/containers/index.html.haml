@@ -10,5 +10,11 @@
     - @containers.each do |c|
       %tr
         %td= link_to c.name, "containers/#{c.name}"
-        %td= c.running? ? "Running" : "Not Running"
-        %td= bytes_in_megabytes(c.memory_limit).to_s + ' MB'
+        %td= c.running? ? "Running" : "Stopped"
+        %td= bytes_in_megabytes(c.memory_usage).to_s + ' MB / ' + bytes_in_megabytes(c.memory_limit).to_s + ' MB'
+        - if c.running?
+          %td
+            %a.btn.btn-danger.btn-small{:href => "/containers/#{c.name}/stop"} Stop
+        - else
+          %td
+            %a.btn.btn-info.btn-small{:href => "/containers/#{c.name}/start"} Start

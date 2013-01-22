@@ -6,7 +6,7 @@
     %td= running_helper @container.running?
   %tr
     %td Memory
-    %td= bytes_in_megabytes(@container.memory_limit).to_s + ' MB'
+    %td= bytes_in_megabytes(@container.memory_usage).to_s + ' MB / ' + bytes_in_megabytes(@container.memory_limit).to_s + ' MB'
   %tr
     %td Root Path
     - @lxc_path = File.join(lxc_path, @container.name)

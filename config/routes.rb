@@ -5,6 +5,8 @@ LxcRails::Application.routes.draw do
     member do
       get 'conf'
       get 'interfaces'
+      get 'start'
+      get 'stop'
     end
   end
 
