@@ -18,6 +18,11 @@ class ContainersController < ApplicationController
     @config_data = view_context.lxc_interfaces_for(@container.name) 
   end
 
+  def pslist
+    @container = Container.find(params[:id])
+    @config_data = LXC.run(:ps, "-n #{params[:id]} -- f")
+  end
+
   def start
     container = LXC.container(params[:id])
     if container.exists?

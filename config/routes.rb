@@ -7,6 +7,7 @@ LxcRails::Application.routes.draw do
       get 'interfaces'
       get 'start'
       get 'stop'
+      get 'pslist'
     end
   end
 
