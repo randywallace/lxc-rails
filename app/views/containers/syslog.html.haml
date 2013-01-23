@@ -1,0 +1,6 @@
+%h1= "Syslog for #{@container.name}"
+%hr
+
+.span12
+  %pre
+    %code.prettyprint.logs= @lines.join("\n")

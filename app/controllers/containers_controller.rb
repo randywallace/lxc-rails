@@ -23,6 +23,12 @@ class ContainersController < ApplicationController
     @config_data = LXC.run(:ps, "-n #{params[:id]} -- f")
   end
 
+  def syslog
+    @container = Container.find(params[:id])
+    log = File.join(view_context.lxc_path, @container.name, "rootfs", "var", "log", "syslog")
+    @lines = `tail -50 #{ log }`.split(/\n/).reverse
+  end
+
   def start
     container = LXC.container(params[:id])
     if container.exists?

@@ -21,3 +21,10 @@
       %td This Container does not have an interface Configuration
     - else
       %td= link_to path, "/containers/#{@container.name}/interfaces"
+  %tr
+    %td Running Tasks
+    %td= link_to "Process List", "/containers/#{@container.name}/pslist"
+  %tr
+    %td Logs
+    %td= link_to "Syslog", "/containers/#{@container.name}/syslog"
+

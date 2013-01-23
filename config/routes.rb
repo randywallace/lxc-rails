@@ -8,6 +8,7 @@ LxcRails::Application.routes.draw do
       get 'start'
       get 'stop'
       get 'pslist'
+      get 'syslog'
     end
   end
 
