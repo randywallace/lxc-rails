@@ -9,6 +9,7 @@ LxcRails::Application.routes.draw do
       get 'stop'
       get 'pslist'
       get 'syslog'
+      post 'write_config'
     end
   end
 

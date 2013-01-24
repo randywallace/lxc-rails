@@ -1,0 +1,45 @@
+%hr
+
+:css
+  #editor {
+      position: absolute;
+      width: 600px;
+      height: 400px;
+  }
+
+.row
+  .span8#editor= @config_data
+  .span4.offset8
+    %form#update_config{action: "/containers/#{@container.name}/write_config", method: "post"}
+      %fieldset
+        .control-group
+          %label.control-label Filename
+          .controls
+            %input.control-label.input-xlarge{:type => "text", :name => "path", :value => @path}
+        .control-group
+          .controls
+            %textarea.control-label#file_editor{:name => "config"}
+        .form-actions
+          %input.btn.btn-primary{:type => "submit", :value => "Save File"}
+
+
+:javascript
+  $(document).ready(function(){
+  var editor = ace.edit("editor");
+  editor.setTheme("ace/theme/github");
+  editor.getSession().setMode("ace/mode/sh");
+  editor.getSession().setUseWrapMode(false);
+  $("#file_editor").hide();
+  $("#update_config").submit(function(){
+  $("#file_editor").val(editor.getSession().getValue());
+  });
+  });
+
+-#:javascript
+-#  var editor = ace.edit("editor");
+-#  editor.setTheme("ace/theme/github");
+-#  editor.getSession().setMode("ace/mode/sh");
+-#  editor.getSession().setUseWrapMode(false);
+-#  editor.setReadOnly(true);
+-#  %pre
+-#    %code.prettyprint.linenums.lang-bash= @config_data

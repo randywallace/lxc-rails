@@ -4,6 +4,28 @@ class ContainersController < ApplicationController
     @containers = Container.all
   end
 
+  def write_config
+    config_path = params[:path]
+    content     = params[:config].gsub!("\r\n", "\n")
+    begin
+      File.open(config_path, 'w') do |file|
+        file.write(content)
+      end
+      redirect_to '/containers/' + params[:id], flash: { notice: "#{config_path} saved successfully"}
+    rescue Exception => e
+      redirect_to '/containers/' + params[:id], flash: { error:  "#{config_path} could not be saved: #{e.message}"}
+    end
+   # respond_to do |format|
+   #   if @timechart.save
+   #     format.html { redirect_to @timechart, notice: 'Timechart was successfully created.' }
+   #     format.json { render json: @timechart, status: :created, location: @timechart }
+   #   else
+   #     format.html { render action: "new" }
+   #     format.json { render json: @timechart.errors, status: :unprocessable_entity }
+   #   end
+   # end
+  end
+
   def show
     @container = Container.find(params[:id])
   end

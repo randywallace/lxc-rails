@@ -1,6 +1,3 @@
 %h1= "Interface Configuration for #{@container.name}"
-%hr
-
-.span10
-  %pre
-    %code.prettyprint.linenums.lang-bash= @config_data
+- @path = @container.interfaces_path
+= render 'layouts/editor'
