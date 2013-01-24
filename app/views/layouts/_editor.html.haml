@@ -2,14 +2,14 @@
 
 :css
   #editor {
-      position: absolute;
-      width: 600px;
+      width: 500px;
       height: 400px;
   }
 
 .row
-  .span8#editor= @config_data
-  .span4.offset8
+  .span6
+    %div#editor= @config_data
+  .span4.offset6
     %form#update_config{action: "/containers/#{@container.name}/write_config", method: "post"}
       %fieldset
         .control-group
@@ -20,8 +20,11 @@
           .controls
             %textarea.control-label#file_editor{:name => "config"}
         .form-actions
-          %input.btn.btn-primary{:type => "submit", :value => "Save File"}
-
+          %center
+            = link_to "Back to #{@container.name}", containers_path + "/" + @container.name, class: "btn"
+            %input.btn.btn-primary#save_button{:type => "submit", :value => "Save File"}
+      %center
+        %a.btn.btn-alert#unlock_button Unlock Document for Editing
 
 :javascript
   $(document).ready(function(){
@@ -29,17 +32,15 @@
   editor.setTheme("ace/theme/github");
   editor.getSession().setMode("ace/mode/sh");
   editor.getSession().setUseWrapMode(false);
+  editor.setReadOnly(true);
   $("#file_editor").hide();
+  $("#save_button").hide();
+  $("#unlock_button").click(function() {
+    editor.setReadOnly(false);
+    $("#unlock_button").hide();
+    $("#save_button").show();
+  });
   $("#update_config").submit(function(){
   $("#file_editor").val(editor.getSession().getValue());
   });
   });
-
--#:javascript
--#  var editor = ace.edit("editor");
--#  editor.setTheme("ace/theme/github");
--#  editor.getSession().setMode("ace/mode/sh");
--#  editor.getSession().setUseWrapMode(false);
--#  editor.setReadOnly(true);
--#  %pre
--#    %code.prettyprint.linenums.lang-bash= @config_data

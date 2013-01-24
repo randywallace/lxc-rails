@@ -4,3 +4,5 @@
 .span10
   %pre
     %code.prettyprint.lang-bash= @container.pslist
+  %center
+    = link_to "Back to #{@container.name}", containers_path + "/" + @container.name, class: "btn"

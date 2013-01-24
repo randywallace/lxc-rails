@@ -1,3 +1,4 @@
 %h1= "Configuration for #{@container.name}"
 - @path = @container.config_path
 = render 'layouts/editor'
+= link_to "#{@container.name}", containers_path + "/" + @container.name, class: "btn"
