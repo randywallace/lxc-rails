@@ -5,8 +5,17 @@ gem 'rails', '3.2.9'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
-gem 'mysql2'
+rby_ver = ENV["RUBY_VERSION"]
+if /jruby.*/ =~ rby_ver
+  gem 'jruby-openssl'
+  gem 'jdbc-sqlite3'
+  gem 'activerecord-jdbcsqlite3-adapter'
+  gem 'puma'
+elsif /ruby-1\.9.*/ =~ rby_ver
+  gem 'thin'
+  gem 'sqlite3'
+end
+#gem 'mysql2'
 gem 'bootstrap-sass'
 gem 'haml-rails'
 gem 'bootstrap-datepicker-rails'
@@ -14,7 +23,7 @@ gem 'anytime-js-rails'
 gem 'devise'
 gem 'lxc-ruby', require: 'lxc'
 gem 'google-code-prettify-rails'
-
+gem 'ace-rails-ap'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -29,6 +38,7 @@ group :assets do
 end
 
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
@@ -37,7 +47,7 @@ gem 'jquery-rails'
 # gem 'jbuilder'
 
 # Use unicorn as the app server
-gem 'unicorn'
+#gem 'unicorn'
 
 # Deploy with Capistrano
 # gem 'capistrano'

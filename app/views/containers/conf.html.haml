@@ -1,6 +1,23 @@
 %h1= "Configuration for #{@container.name}"
 %hr
 
-.span10
-  %pre
-    %code.prettyprint.linenums.lang-bash= @config_data
+:css
+  #editor {
+      position: absolute;
+      width: 600px;
+      height: 400px;
+  }
+
+.row
+  .span8#editor= @config_data
+  .span4.offset8
+    %p test
+
+:javascript
+  var editor = ace.edit("editor");
+  editor.setTheme("ace/theme/github");
+  editor.getSession().setMode("ace/mode/sh");
+  editor.getSession().setUseWrapMode(false);
+-#  %pre
+-#    %code.prettyprint.linenums.lang-bash= @config_data
+

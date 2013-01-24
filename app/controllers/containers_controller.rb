@@ -10,23 +10,21 @@ class ContainersController < ApplicationController
 
   def conf
     @container = Container.find(params[:id])
-    @config_data = view_context.lxc_config_for(@container.name)
+    @config_data = @container.config
   end
   
   def interfaces
     @container = Container.find(params[:id])
-    @config_data = view_context.lxc_interfaces_for(@container.name) 
+    @config_data = @container.interfaces
   end
 
   def pslist
     @container = Container.find(params[:id])
-    @config_data = LXC.run(:ps, "-n #{params[:id]} -- f")
   end
 
   def syslog
     @container = Container.find(params[:id])
-    log = File.join(view_context.lxc_path, @container.name, "rootfs", "var", "log", "syslog")
-    @lines = `tail -50 #{ log }`.split(/\n/).reverse
+    @lines = `tail -50 #{ @container.syslog_path }`.split(/\n/).reverse
   end
 
   def start
