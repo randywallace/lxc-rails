@@ -2,14 +2,14 @@
 
 :css
   #editor {
-      width: 500px;
+      position: relative;
+      width: 580px;
       height: 400px;
   }
 
 .row
-  .span6
-    %div#editor= @config_data
-  .span4.offset6
+.row
+  .span2
     %form#update_config{action: "/containers/#{@container.name}/write_config", method: "post"}
       %fieldset
         .control-group
@@ -21,10 +21,14 @@
             %textarea.control-label#file_editor{:name => "config"}
         .form-actions
           %center
-            = link_to "Back to #{@container.name}", containers_path + "/" + @container.name, class: "btn"
             %input.btn.btn-primary#save_button{:type => "submit", :value => "Save File"}
-      %center
-        %a.btn.btn-alert#unlock_button Unlock Document for Editing
+          %center
+            %a.btn.btn-primary#unlock_button Unlock Document for Editing
+        .form-actions
+          %center
+            = link_to "Back to #{@container.name}", containers_path + "/" + @container.name, class: "btn"
+  .span8.offset2
+    %div#editor= @config_data
 
 :javascript
   $(document).ready(function(){
@@ -44,3 +48,4 @@
   $("#file_editor").val(editor.getSession().getValue());
   });
   });
+
