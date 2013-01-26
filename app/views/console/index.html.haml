@@ -11,6 +11,7 @@
           %input.btn.btn-block#clearResults{value: 'Clear'}
           = submit_tag "Run", class: "btn btn-primary btn-block", id: "run"
   .span8.offset2
+    #alert_failed_job
     %pre
       %code.prettyprint.lang-bash#results
 
@@ -18,10 +19,3 @@
   jQuery(function($) {
       $('#clearResults').click(function() { $('#results').empty() })
   })
-  updateResults = function(){
-    $.ajax({
-      url:'/console/read',
-      method:'POST',
-      success:function(){
-        setInterval(updateResults,10000);
-        }})}

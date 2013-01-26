@@ -1,1 +1,10 @@
 $('#results').text('<%= escape_javascript @data %>');
+if('<%= escape_javascript @status["status"] %>'=='completed'){
+  clearInterval(upd_id);
+  $('#run').removeAttr('disabled').attr('value', 'Run').attr('class', 'btn btn-primary btn-block');
+  }else if('<%= escape_javascript @status["status"] %>'=='failed'){
+  $('#alert_failed_job').attr('class', 'alert alert-error').html('<div id="flash_notice">Job Failed</div>').fadeOut(5000);
+  clearInterval(upd_id);
+  $('#run').removeAttr('disabled').attr('value', 'Run').attr('class', 'btn btn-primary btn-block');
+  }
+

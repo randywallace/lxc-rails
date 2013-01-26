@@ -13,9 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
-//= require bootstrap-datepicker
 //= require google-code-prettify-rails/prettify
-//= require anytime
 //= require ace
 //= require theme-github.js
 //= require mode-sh.js

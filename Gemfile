@@ -19,6 +19,7 @@ end
 gem 'open4'
 gem 'daemons'
 gem 'resque'
+gem 'resque-status'
 gem 'bootstrap-sass'
 gem 'haml-rails'
 #gem 'devise'
