@@ -1,0 +1,27 @@
+%h1 Console
+
+.row
+  .span2
+    = form_for 'console', :remote => true do |f|
+      %fieldset
+        .control-group
+        .controls
+          = f.text_field :script, class: 'control-label input-xlarge', value: session[:script]  
+        .form-actions
+          %input.btn.btn-block#clearResults{value: 'Clear'}
+          = submit_tag "Run", class: "btn btn-primary btn-block", id: "run"
+  .span8.offset2
+    %pre
+      %code.prettyprint.lang-bash#results
+
+:javascript
+  jQuery(function($) {
+      $('#clearResults').click(function() { $('#results').empty() })
+  })
+  updateResults = function(){
+    $.ajax({
+      url:'/console/read',
+      method:'POST',
+      success:function(){
+        setInterval(updateResults,10000);
+        }})}

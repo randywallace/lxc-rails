@@ -1,0 +1,11 @@
+$('#results').empty();
+$('#run').attr('disabled', 'disabled').attr('value', 'Running').attr('class', 'btn btn-info btn-block');
+updateResults = function(){
+  $.ajax({
+    url:'/console/read',
+    method:'POST',
+    data: {id: '<%= escape_javascript(@path) %>'},
+    success:function(){
+      setInterval(updateResults,1000);
+      }})}
+updateResults();

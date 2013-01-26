@@ -1,6 +1,13 @@
 LxcRails::Application.routes.draw do
   # The priority is based upon order of creation:
   # first created -> highest priority.
+  root :to => 'containers#index'
+  require 'resque/server'
+  mount Resque::Server.new, :at => "/resque"
+  get 'console' => 'console#index'
+  post 'console' => 'console#run'
+  post 'console/read' => 'console#read'
+
   resources :containers, :path_names => {:conf => "config"} do
     member do
       get 'conf'
@@ -59,7 +66,6 @@ LxcRails::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'containers#index'
 
   # See how all your routes lay out with "rake routes"
 
