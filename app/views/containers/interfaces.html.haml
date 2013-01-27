@@ -1,3 +1,4 @@
-%h1= "Interface Configuration for #{@container.name}"
-- @path = @container.interfaces_path
-= render 'layouts/editor'
+.page-header
+  %h1= "Interface Configuration for #{@container.name}"
+  - @path = @container.interfaces_path
+  = render 'layouts/editor'

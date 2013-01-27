@@ -1,0 +1,16 @@
+.page-header
+  %center
+    %h1
+      = @page_name
+
+.row
+  .span2
+    %center
+      %h3 See Also
+    %ul.nav.nav-list
+      - @see_also.uniq.each do |m|
+        %li= link_to m, "/man/" + m.tr('.',',')
+  .span9.offset1
+    #alert_failed_job
+    %pre{style: "overflow: auto; height: 430px;"}
+      %code= @data

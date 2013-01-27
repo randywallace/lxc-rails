@@ -2,7 +2,13 @@
   LXC Panel
 %ul.nav
   %li
-    = link_to "Containers", "/containers"
+    = link_to "Containers", containers_path
+  %li
+    = link_to "Host Console", console_path
+  %li
+    = link_to "LXC Manual", '/man/lxc'
+  %li
+    = link_to "Resque Status", '/resque/statuses'
 -# %ul.nav.pull-right
 -#   - if !user_signed_in?
 -#     %li

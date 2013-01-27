@@ -1,18 +1,18 @@
-%h1 Console
+.page-header
+  %h1 Console
 
 .row
-  .span2
+  .span12
     = form_for 'console', :remote => true do |f|
-      %fieldset
-        .control-group
-        .controls
-          = f.text_field :script, class: 'control-label input-xlarge', value: session[:script]  
-        .form-actions
-          %input.btn.btn-block#clearResults{value: 'Clear'}
-          = submit_tag "Run", class: "btn btn-primary btn-block", id: "run"
-  .span8.offset2
+      %center
+        .input-append
+          %input.input-xxlarge#console_script{name: "console[script]", type: "text", value: session[:script]}
+          %input.btn.btn-info.input-small#clearResults{value: 'Clear'}
+          %input.btn.btn-primary.span2#run{name: "commit", type: "submit", value: "Run"}
+.row
+  .span12
     #alert_failed_job
-    %pre
+    %pre#results_wrap{style: "overflow: auto; height: 350px;"}
       %code.prettyprint.lang-bash#results
 
 :javascript

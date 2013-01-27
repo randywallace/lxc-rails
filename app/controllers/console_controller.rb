@@ -12,7 +12,6 @@ class ConsoleJob
       t = Open4::bg script, 1=>f, 2=>f
       waiter = Thread.new do 
         t.exitstatus
-        f.write("Finished!\n")
         f.flush
       end
       waiter.join

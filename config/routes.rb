@@ -2,11 +2,12 @@ LxcRails::Application.routes.draw do
   # The priority is based upon order of creation:
   # first created -> highest priority.
   root :to => 'containers#index'
-  require 'resque/server'
   mount Resque::Server.new, :at => "/resque"
   get 'console' => 'console#index'
   post 'console' => 'console#run'
   post 'console/read' => 'console#read'
+
+  get 'man/:id' => 'man#show'
 
   resources :containers, :path_names => {:conf => "config"} do
     member do

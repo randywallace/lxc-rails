@@ -23,13 +23,23 @@
               = render 'layouts/messages'
               = yield
           %hr
-          %footer.footer
-            .container
-              %center
-                %p 
-                  = "See this on"
-                  %a{href: "https://github.com/randywallace/lxc-rails"} Github
-                %p 
-                  = "Code licensed under the "
-                  %a{href: "http://opensource.org/licenses/MIT"} MIT License
-                %p &copy; Randy Wallace
+        %footer.footer
+          %center
+            = "Source Code available at"
+            %a{href: "https://github.com/randywallace/lxc-rails"} Github
+            %br
+            = "Code licensed under the "
+            %a{href: "http://opensource.org/licenses/MIT"} MIT License
+            %br
+            = "Theme Spacelab available at"
+            = link_to "Bootswatch", 'http://bootswatch.com/spacelab/'
+            %br
+            = "Layout based on"
+            = link_to "Bootstrap", 'http://twitter.github.com/bootstrap'
+            %br
+            = "Icons from"
+            = link_to "Glyphicons", 'http://glyphicons.com/'
+            %br
+            = "Web fonts from"
+            = link_to "Google", 'http://www.google.com/webfonts'
+            %p &copy; 2013 Randy Wallace

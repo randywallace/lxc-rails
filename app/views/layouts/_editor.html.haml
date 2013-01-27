@@ -3,36 +3,30 @@
 :css
   #editor {
       position: relative;
-      width: 580px;
+      width: 880px;
       height: 400px;
   }
 
 .row
-  .span2
-    %form#update_config{action: "/containers/#{@container.name}/write_config", method: "post"}
-      %fieldset
-        .control-group
-          %label.control-label Filename
-          .controls
-            %input.control-label.input-xlarge{:type => "text", :name => "path", :value => @path}
-        .control-group
-          .controls
-            %textarea.control-label#file_editor{:name => "config"}
-        .form-actions
-          %center
-            %input.btn.btn-primary#save_button{:type => "submit", :value => "Save File"}
-          %center
-            %a.btn.btn-primary#unlock_button Unlock Document for Editing
-        .form-actions
-          %center
-            = link_to "Back to #{@container.name}", containers_path + "/" + @container.name, class: "btn"
-  .span8.offset2
-    %div#editor= @config_data
+  .span12
+    %center
+      %form#update_config{action: "/containers/#{@container.name}/write_config", method: "post"}
+        .input-prepend.input-append
+          %span.add-on Save as:
+          %input.control-label.span4{:type => "text", :name => "path", :value => @path}
+          %input.btn.btn-primary#save_button{:type => "submit", :value => "Save File"}
+          %a.btn.btn-primary#unlock_button Unlock Document for Editing
+        %textarea.control-label#file_editor{:name => "config"}
+.span12
+  %div#editor= @config_data
+  %center
+    %br
+    = link_to "Back to #{@container.name}", containers_path + "/" + @container.name, class: "btn"
 
 :javascript
   $(document).ready(function(){
   var editor = ace.edit("editor");
-  editor.setTheme("ace/theme/github");
+  editor.setTheme("ace/theme/tomorrow_night");
   editor.getSession().setMode("ace/mode/sh");
   editor.getSession().setUseWrapMode(false);
   editor.setReadOnly(true);
