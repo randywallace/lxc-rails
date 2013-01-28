@@ -2,12 +2,14 @@ $('#results').text('<%= escape_javascript @data.html_safe %>');
 $("#results_wrap").each( function() 
   {var scrollHeight = Math.max(this.scrollHeight, this.clientHeight);
   this.scrollTop = scrollHeight - this.clientHeight;});
-if('<%= escape_javascript @status["status"] %>'=='completed'){
+if(('<%= escape_javascript @status["status"] %>'=='completed')||('<%= escape_javascript @status["status"] %>'=='killed')){
   clearInterval(upd_id);
   $('#run').removeAttr('disabled').attr('value', 'Run').attr('class', 'btn btn-primary span2');
+  $('#stop_button').attr('disabled', 'disabled')
   }else if('<%= escape_javascript @status["status"] %>'=='failed'){
-  $('#alert_failed_job').attr('class', 'alert alert-error').html('<div id="flash_notice">Job Failed</div>').fadeOut(3000);
+  $('#alert_failed_job').show().attr('class', 'alert alert-error').html('<div id="flash_notice"><center>Job Failed... try again?</center></div>').fadeOut(3000);
   clearInterval(upd_id);
   $('#run').removeAttr('disabled').attr('value', 'Run').attr('class', 'btn btn-primary span2');
+  $('#stop_button').attr('disabled', 'disabled')
   }
 

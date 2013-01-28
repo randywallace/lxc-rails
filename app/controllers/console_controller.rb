@@ -10,17 +10,35 @@ class ConsoleJob
     File.open(path, 'w') do |f|
       f.sync = true
       t = Open4::bg script, 1=>f, 2=>f
+      ticker_var = true
+      ticker = Thread.new do
+        while ticker_var
+          tick
+          sleep 0.5
+        end
+      end
       waiter = Thread.new do 
         t.exitstatus
         f.flush
       end
       waiter.join
+      ticker_var = false
+      tick.join
     end
   end
 end
 
 class ConsoleController < ApplicationController
   def index
+  end
+
+  def stop
+    @status = Resque::Plugins::Status::Hash.get(params[:job])
+    Resque::Plugins::Status::Hash.kill(params[:job])
+    @job_id = @status.uuid
+    respond_to do |format|
+      format.js
+    end
   end
 
   def read

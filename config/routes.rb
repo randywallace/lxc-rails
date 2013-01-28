@@ -6,6 +6,7 @@ LxcRails::Application.routes.draw do
   get 'console' => 'console#index'
   post 'console' => 'console#run'
   post 'console/read' => 'console#read'
+  post 'console/stop' => 'console#stop'
 
   get 'man/:id' => 'man#show'
 

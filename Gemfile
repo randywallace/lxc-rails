@@ -5,16 +5,8 @@ gem 'rails', '3.2.9'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-rby_ver = ENV["RUBY_VERSION"]
-if /jruby.*/ =~ rby_ver
-  gem 'jruby-openssl'
-  gem 'jdbc-sqlite3'
-  gem 'activerecord-jdbcsqlite3-adapter'
-  gem 'puma'
-elsif /ruby-1\.9.*/ =~ rby_ver
-  gem 'thin'
-  gem 'sqlite3'
-end
+gem 'thin'
+gem 'sqlite3'
 #gem 'mysql2'
 gem 'open4'
 gem 'daemons'

@@ -1,5 +1,13 @@
 $('#results').empty();
 $('#run').attr('disabled', 'disabled').attr('value', 'Running').attr('class', 'btn btn-info span2');
+$('#stop_button').removeAttr('disabled');
+$("#stop_button").click(function(){
+  $.ajax({
+    url:'/console/stop',
+    method:'POST',
+    data: {job: '<%= escape_javascript(@job_id) %>'},
+  });
+});
 updateResults = function(){
   $.ajax({
     url:'/console/read',
