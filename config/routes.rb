@@ -9,6 +9,7 @@ LxcRails::Application.routes.draw do
   post 'console/stop' => 'console#stop'
 
   get 'man/:id' => 'man#show'
+  get 'man/:id/:type' => 'man#show'
 
   resources :containers, :path_names => {:conf => "config"} do
     member do

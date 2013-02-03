@@ -9,7 +9,7 @@
       %h3 See Also
     %ul.nav.nav-list
       - @see_also.uniq.each do |m|
-        %li= link_to m, "/man/" + m.tr('.',',')
+        %li= link_to "#{m[0]}(#{m[1]})", "/man/" + m[0].tr('.',',') + '/' + m[1].to_s
   .span9.offset1
     #alert_failed_job
     %pre{style: "overflow: auto; height: 430px;"}

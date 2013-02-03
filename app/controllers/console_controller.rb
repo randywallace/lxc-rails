@@ -35,13 +35,13 @@ class ConsoleController < ApplicationController
   def stop
     @status = Resque::Plugins::Status::Hash.get(params[:job])
     Resque::Plugins::Status::Hash.kill(params[:job])
-    sleep 5
-    Resque::Worker.all.each do |worker| 
-      system("kill -USR1 #{worker.to_s.gsub(/.*[:]{1}(\d+)[:].*/, '\1')}")
-    end
     @job_id = @status.uuid
     respond_to do |format|
       format.js
+    end
+    sleep 5
+    Resque::Worker.all.each do |worker| 
+      system("kill -USR1 #{worker.to_s.gsub(/.*[:]{1}(\d+)[:].*/, '\1')}")
     end
   end
 
