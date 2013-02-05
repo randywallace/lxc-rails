@@ -5,12 +5,14 @@
   %thead
     %tr
       %th Name
+      %th IP
       %th State
       %th Memory
   %tbody
     - @containers.each do |c|
       %tr
         %td= link_to c.name, "containers/#{c.name}"
+        %td= c.ip
         %td= running_helper c.running? 
         %td= bytes_in_megabytes(c.memory_usage).to_s + ' MB / ' + bytes_in_megabytes(c.memory_limit).to_s + ' MB'
         - if c.running?

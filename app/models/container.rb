@@ -27,6 +27,29 @@ module LXC
     def syslog_path
       File.join(root_path, "rootfs", "var", "log", "syslog")
     end
+
+    def ip
+      unless interfaces_path.nil?
+        File.open(interfaces_path).each_line do |line| 
+          if line.match(/\saddress/)
+            return line.match(/(([0-9]+\.){3}[0-9]+)/)
+          end
+        end
+      end
+      File.open(File.join('/', 'var', 'lib', 'misc', 'dnsmasq.leases')).each_line do |line|
+        if line.match(name)
+          return line.match(/(([0-9]+\.){3}[0-9]+)/)
+        end
+      end
+    end
+
+    def users
+      users = []
+      File.open(File.join(root_path, 'rootfs', 'etc', 'passwd')).each_line do |line|
+        users << line.split(':')
+      end
+      users
+    end
   end
 end
         

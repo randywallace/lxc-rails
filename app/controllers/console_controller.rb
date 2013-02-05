@@ -43,6 +43,7 @@ class ConsoleController < ApplicationController
     Resque::Worker.all.each do |worker| 
       system("kill -USR1 #{worker.to_s.gsub(/.*[:]{1}(\d+)[:].*/, '\1')}")
     end
+    #redirect_to '/console', alert: {notice: "Job #{@job_id} sent KILL Message."}
   end
 
   def read
@@ -61,8 +62,6 @@ class ConsoleController < ApplicationController
     @path = '/tmp/consoleJob-' + Time.now.strftime('%s')
     File.open(@path, 'w') { |f| f.write("Running: #{@script}...\n") }
     @job_id = ConsoleJob.create(script: @script, path: @path)
-    logger.info @job_id
-    #ConsoleJob.perform(@script, @path)
     respond_to do |format|
       format.js
     end

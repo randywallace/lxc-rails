@@ -3,6 +3,14 @@
 
 %table.table.table-condensed
   %tr
+    %td IP Address
+    %td= @container.ip
+  %tr
+    %td Users
+    - users = ''
+    - @container.users.each {|u| users += "#{u[0]} " if u[2].to_i > 499 and u[2].to_i < 1500}
+    %td= users
+  %tr
     %td State
     %td= running_helper @container.running?
   %tr
