@@ -4,7 +4,7 @@
 %table.table.table-condensed
   %tr
     %td IP Address
-    %td= @container.ip
+    %td= link_to @container.ip, "http://#{@container.ip}"
   %tr
     %td Users
     - users = ''
@@ -36,6 +36,9 @@
   %tr
     %td Logs
     %td= link_to "Syslog", "/containers/#{@container.name}/syslog"
+  %tr
+    %td Open Ports
+    %td= link_to "Network Stats", "/containers/#{@container.name}/netstat"
 
 %center
   = link_to 'Back', containers_path, class: "btn"

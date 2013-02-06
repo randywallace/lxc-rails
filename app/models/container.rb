@@ -21,9 +21,15 @@ module LXC
       p = interfaces_path
       File.open(p).read unless p.nil?
     end
+
     def pslist
       LXC.run(:ps, "-n #{name} -- f")
     end
+
+    def netstat
+      LXC.run(:netstat, "-n #{name} -lnptu")
+    end
+
     def syslog_path
       File.join(root_path, "rootfs", "var", "log", "syslog")
     end

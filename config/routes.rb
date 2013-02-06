@@ -18,6 +18,7 @@ LxcRails::Application.routes.draw do
       get 'start'
       get 'stop'
       get 'pslist'
+      get 'netstat'
       get 'syslog'
       post 'write_config'
     end

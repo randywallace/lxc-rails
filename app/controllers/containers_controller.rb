@@ -34,6 +34,10 @@ class ContainersController < ApplicationController
   def pslist
     @container = Container.find(params[:id])
   end
+  
+  def netstat
+    @container = Container.find(params[:id])
+  end
 
   def syslog
     @container = Container.find(params[:id])

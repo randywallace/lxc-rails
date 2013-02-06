@@ -1,8 +1,9 @@
+
 .page-header
-  %h1= "Process List for #{@container.name}"
+  %h1= "Netstat for #{@container.name}"
 
 .span12
   %pre
-    %code.prettyprint.lang-bash= @container.pslist
+    %code.prettyprint.lang-bash= @container.netstat
   %center
     = link_to "Back to #{@container.name}", containers_path + "/" + @container.name, class: "btn"
