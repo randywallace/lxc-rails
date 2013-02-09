@@ -3,12 +3,23 @@ module LXC
     def root_path
       File.join(LXC.run(:ls, '-d').split("\n").first, name)
     end
+
     def config_path
       File.join(root_path, 'config')
     end
+
     def config
       File.open(config_path).read
     end
+
+    def fstab_path 
+      File.join(root_path, 'fstab')
+    end
+
+    def fstab
+      File.open(fstab_path).read
+    end
+
     def interfaces_path
       f = File.join(root_path, 'rootfs', 'etc', 'network', 'interfaces')
       if File.exists?(f)
@@ -47,6 +58,7 @@ module LXC
           return line.match(/(([0-9]+\.){3}[0-9]+)/)
         end
       end
+      return ""
     end
 
     def users

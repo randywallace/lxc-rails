@@ -25,6 +25,12 @@ class ContainersController < ApplicationController
     @container = Container.find(params[:id])
     @config_data = @container.config
   end
+
+  def fstab
+    @container = Container.find(params[:id])
+    @config_data = @container.fstab
+  end
+  
   
   def interfaces
     @container = Container.find(params[:id])

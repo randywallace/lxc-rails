@@ -14,6 +14,7 @@ LxcRails::Application.routes.draw do
   resources :containers, :path_names => {:conf => "config"} do
     member do
       get 'conf'
+      get 'fstab'
       get 'interfaces'
       get 'start'
       get 'stop'

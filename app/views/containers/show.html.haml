@@ -24,6 +24,9 @@
     %td Container Configuration
     %td= link_to @container.config_path, "/containers/#{@container.name}/config"
   %tr
+    %td Container FStab
+    %td= link_to @container.fstab_path, "/containers/#{@container.name}/fstab"
+  %tr
     %td Network Configuration
     - path = @container.interfaces_path 
     - if path.nil?
