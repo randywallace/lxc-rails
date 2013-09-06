@@ -53,9 +53,17 @@ module LXC
           end
         end
       end
-      File.open(File.join('/', 'var', 'lib', 'misc', 'dnsmasq.leases')).each_line do |line|
-        if line.match(name)
-          return line.match(/(([0-9]+\.){3}[0-9]+)/)
+      begin
+        File.open(File.join('/', 'var', 'lib', 'misc', 'dnsmasq.leases')).each_line do |line|
+          if line.match(name)
+            return line.match(/(([0-9]+\.){3}[0-9]+)/)
+          end
+        end
+      rescue
+        File.open(File.join('/', 'var', 'lib', 'lxc', name, 'config.lxc')).each_line do |line|
+          if line.match(/lxc.network.ipv4/)
+            return line.match(/(([0-9]+\.){3}[0-9]+)/) 
+          end
         end
       end
       return ""
