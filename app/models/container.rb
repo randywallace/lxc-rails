@@ -71,8 +71,11 @@ module LXC
 
     def users
       users = []
-      File.open(File.join(root_path, 'rootfs', 'etc', 'passwd')).each_line do |line|
-        users << line.split(':')
+      f = File.join(root_path, 'rootfs', 'etc', 'passwd')
+      if File.exists?(f)
+        File.open(f).each_line do |line|
+          users << line.split(':')
+        end
       end
       users
     end
